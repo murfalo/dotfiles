@@ -11,12 +11,12 @@
 #  KEY="VALUE" does _not_ work!
 
 EDITOR=nvim
-BROWSER=firefox-developer-edition
-NAME="Jon Gjengset"
-EMAIL=jon@tsp.io
+BROWSER=firefox
+NAME="Murphy Angelo"
+EMAIL=howdy@murfalo.com
 
 # Globals
-TZ=Europe/Oslo
+TZ=America/New_York
 
 # Configs
 R_LIBS_USER=@{HOME}/.Rpackages

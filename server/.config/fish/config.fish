@@ -50,8 +50,8 @@ setenv LESS_TERMCAP_us \e'[04;38;5;146m' # begin underline
 # Set envvars since we don't have .pam_environment
 setenv EDITOR nvim
 setenv BROWSER links
-setenv NAME "Jon Gjengset"
-setenv EMAIL jon@tsp.io
+setenv NAME "Murphy Angelo"
+setenv EMAIL howdy@murfalo.com
 setenv RUST_BACKTRACE 1
 setenv LESS "-F -X -R"
 if test -e ~/.cargo-target

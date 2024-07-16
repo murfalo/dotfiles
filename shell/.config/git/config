@@ -1,6 +1,6 @@
 [user]
-	name = Jon Gjengset
-	email = jon@thesquareplanet.com
+	name = Murphy Angelo
+	email = git@murfalo.com
 [ui "color"]
 	ui = always
 [color]
@@ -28,14 +28,10 @@
 	default = simple
 [help]
 	autocorrect = 1
-[url "git.launchpad.net"]
-	insteadOf = lp:
-[url "git@g.csail.mit.edu:"]
-	insteadOf = g:
 [url "git@github.com:"]
 	insteadOf = gh:
 [github]
-	user = jonhoo
+	user = murfalo
 [diff]
 	algorithm = histogram
 	indentHeuristic = true
