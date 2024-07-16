@@ -54,7 +54,7 @@ foreground = "0xd5c4a1"
 size = 12.0
 
 [font.normal]
-family = "Noto Sans Mono"
+family = "JetBrainsMono Nerd Font"
 
 [[keyboard.bindings]]
 action = "Paste"
