@@ -1,0 +1,27 @@
+[user]
+	name = Murphy Angelo
+	email = git@murfalo.com
+[ui "color"]
+	ui = always
+[color]
+	ui = true
+[core]
+	autocrlf = input
+	safecrlf = true
+[merge]
+	tool = nvim -d
+[pull]
+	ff = only
+[push]
+	default = simple
+[help]
+	autocorrect = 1
+[url "git@github.com:"]
+	insteadOf = gh:
+[github]
+	user = murfalo
+[diff]
+	algorithm = patience
+	compactionHeuristic = true
+[protocol]
+	version = 2

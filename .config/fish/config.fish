@@ -1,21 +1,4 @@
-abbr -a yr 'cal -y'
-abbr -a c cargo
-abbr -a e nvim
-abbr -a m make
-abbr -a o xdg-open
-abbr -a g git
-abbr -a gc 'git checkout'
-abbr -a ga 'git add -p'
 abbr -a vimdiff 'nvim -d'
-abbr -a ct 'cargo t'
-abbr -a amz 'env AWS_SECRET_ACCESS_KEY=(pass www/aws-secret-key | head -n1)'
-abbr -a ais "aws ec2 describe-instances | jq '.Reservations[] | .Instances[] | {iid: .InstanceId, type: .InstanceType, key:.KeyName, state:.State.Name, host:.PublicDnsName}'"
-abbr -a gah 'git stash; and git pull --rebase; and git stash pop'
-abbr -a ks 'keybase chat send'
-abbr -a kr 'keybase chat read'
-abbr -a kl 'keybase chat list'
-abbr -a pr 'gh pr create -t (git show -s --format=%s HEAD) -b (git show -s --format=%B HEAD | tail -n+3)'
-complete --command aurman --wraps pacman
 
 if status --is-interactive
 	if test -d ~/dev/others/base16/templates/fish-shell
@@ -25,17 +8,6 @@ if status --is-interactive
 	if ! set -q TMUX
 		exec tmux
 	end
-end
-
-if command -v paru > /dev/null
-	abbr -a p 'paru'
-	abbr -a up 'paru -Syu'
-else if command -v aurman > /dev/null
-	abbr -a p 'aurman'
-	abbr -a up 'aurman -Syu'
-else
-	abbr -a p 'sudo pacman'
-	abbr -a up 'sudo pacman -Syu'
 end
 
 if command -v eza > /dev/null
@@ -53,60 +25,16 @@ if test -f /usr/share/autojump/autojump.fish;
 	source /usr/share/autojump/autojump.fish;
 end
 
-function pwl
-	set -Ux OP_SESSION_my (pw signin my --raw)
-end
-
-function ssh
-	switch $argv[1]
-	case "*.amazonaws.com"
-		env TERM=xterm /usr/bin/ssh $argv
-	case "ubuntu@"
-		env TERM=xterm /usr/bin/ssh $argv
-	case "*"
-		/usr/bin/ssh $argv
-	end
-end
-
-function apass
-	if test (count $argv) -ne 1
-		pass $argv
-		return
-	end
-
-	asend (pass $argv[1] | head -n1)
-end
-
-function qrpass
-	if test (count $argv) -ne 1
-		pass $argv
-		return
-	end
-
-	qrsend (pass $argv[1] | head -n1)
-end
-
-function asend
-	if test (count $argv) -ne 1
-		echo "No argument given"
-		return
-	end
-
-	adb shell input text (echo $argv[1] | sed -e 's/ /%s/g' -e 's/\([#[()<>{}$|;&*\\~"\'`]\)/\\\\\1/g')
-end
-
-function qrsend
-	if test (count $argv) -ne 1
-		echo "No argument given"
-		return
-	end
-
-	qrencode -o - $argv[1] | feh --geometry 500x500 --auto-zoom -
-end
-
-function limit
-	numactl -C 0,1,2 $argv
-end
+#function ssh
+#	switch $argv[1]
+#	case "*.amazonaws.com"
+#		env TERM=xterm /usr/bin/ssh $argv
+#	case "ubuntu@"
+#		env TERM=xterm /usr/bin/ssh $argv
+#	case "*"
+#		/usr/bin/ssh $argv
+#	end
+#end
 
 function remote_alacritty
 	# https://gist.github.com/costis/5135502
@@ -117,28 +45,8 @@ function remote_alacritty
 	ssh $argv[1] rm "alacritty.ti"
 end
 
-function remarkable
-	if test (count $argv) -lt 1
-		echo "No files given"
-		return
-	end
-
-	ip addr show up to 10.11.99.0/29 | grep enp0s20f0u2 >/dev/null
-	if test $status -ne 0
-		# not yet connected
-		echo "Connecting to reMarkable internal network"
-		sudo dhcpcd enp0s20f0u2
-	end
-	for f in $argv
-		echo "-> uploading $f"
-		curl --form "file=@\""$f"\"" http://10.11.99.1/upload
-		echo
-	end
-	sudo dhcpcd -k enp2s0f0u3
-end
-
 # Type - to move up to top parent dir which is a repository
-function d
+function -
 	while test $PWD != "/"
 		if test -d .git
 			break
@@ -167,29 +75,6 @@ setenv LESS_TERMCAP_us \e'[04;38;5;146m' # begin underline
 setenv FZF_DEFAULT_COMMAND 'fd --type file --follow'
 setenv FZF_CTRL_T_COMMAND 'fd --type file --follow'
 setenv FZF_DEFAULT_OPTS '--height 20%'
-
-abbr -a nova 'env OS_PASSWORD=(pass www/mit-openstack | head -n1) nova'
-abbr -a glance 'env OS_PASSWORD=(pass www/mit-openstack | head -n1) glance'
-setenv OS_USERNAME jfrg@csail.mit.edu
-setenv OS_TENANT_NAME usersandbox_jfrg
-setenv OS_AUTH_URL https://nimbus.csail.mit.edu:5001/v2.0
-setenv OS_IMAGE_API_VERSION 1
-setenv OS_VOLUME_API_VERSION 2
-function penv -d "Set up environment for the PDOS openstack service"
-	env OS_PASSWORD=(pass www/mit-openstack | head -n1) OS_TENANT_NAME=pdos OS_PROJECT_NAME=pdos $argv
-end
-function pvm -d "Run nova/glance commands against the PDOS openstack service"
-	switch $argv[1]
-	case 'image-*'
-		penv glance $argv
-	case 'c'
-		penv cinder $argv[2..-1]
-	case 'g'
-		penv glance $argv[2..-1]
-	case '*'
-		penv nova $argv
-	end
-end
 
 function fish_user_key_bindings
 	bind \cz 'fg>/dev/null ^/dev/null'
