@@ -1,7 +1,5 @@
 abbr -a vimdiff 'nvim -d'
 
-fish_set_vi_keybindings
-
 if status --is-interactive
 	if test -d ~/dev/others/base16/templates/fish-shell
 		set fish_function_path $fish_function_path ~/dev/others/base16/templates/fish-shell/functions
@@ -51,7 +49,7 @@ function remote_alacritty
 end
 
 # Type - to move up to top parent dir which is a repository
-function -
+function d
 	while test $PWD != "/"
 		if test -d .git
 			break
@@ -66,6 +64,9 @@ set __fish_git_prompt_showdirtystate 'yes'
 set __fish_git_prompt_showstashstate ''
 set __fish_git_prompt_showupstream 'none'
 set -g fish_prompt_pwd_dir_length 3
+
+# Fish vi keybindings
+fish_vi_key_bindings
 
 # colored man output
 # from http://linuxtidbits.wordpress.com/2009/03/23/less-colors-for-man-pages/
@@ -92,7 +93,7 @@ function fish_prompt
 	set_color brblack
 	echo -n "["(date "+%H:%M")"] "
 	set_color blue
-	echo -n (hostnamectl hostname)
+	#echo -n (hostnamectl hostname)
 	if [ $PWD != $HOME ]
 		set_color brblack
 		echo -n ':'
