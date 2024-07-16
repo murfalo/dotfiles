@@ -1,9 +1,14 @@
 abbr -a vimdiff 'nvim -d'
 
+fish_set_vi_keybindings
+
 if status --is-interactive
 	if test -d ~/dev/others/base16/templates/fish-shell
 		set fish_function_path $fish_function_path ~/dev/others/base16/templates/fish-shell/functions
 		builtin source ~/dev/others/base16/templates/fish-shell/conf.d/base16.fish
+	end
+	if test -x /opt/homebrew/bin/brew
+		eval (/opt/homebrew/bin/brew shellenv)
 	end
 	if ! set -q TMUX
 		exec tmux
