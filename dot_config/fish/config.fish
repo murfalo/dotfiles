@@ -14,10 +14,10 @@ if status --is-interactive
 end
 
 if command -v eza > /dev/null
-	abbr -a l 'eza'
-	abbr -a ls 'eza'
-	abbr -a ll 'eza -l'
-	abbr -a lll 'eza -la'
+	abbr -a l 'eza --icons'
+	abbr -a ls 'eza --icons'
+	abbr -a ll 'eza -l --icons'
+	abbr -a lll 'eza -la --icons'
 else
 	abbr -a l 'ls'
 	abbr -a ll 'ls -l'
