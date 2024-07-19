@@ -92,8 +92,12 @@ end
 function fish_prompt
 	set_color brblack
 	echo -n "["(date "+%H:%M")"] "
-	set_color blue
-	#echo -n (hostnamectl hostname)
+	set_color brwhite
+    if command -q hostnamectl
+	    echo -n (hostnamectl hostname)
+    else if command -q hostname
+        echo -n (hostname)
+    end
 	if [ $PWD != $HOME ]
 		set_color brblack
 		echo -n ':'
@@ -102,7 +106,7 @@ function fish_prompt
 	end
 	set_color green
 	printf '%s ' (__fish_git_prompt)
-	set_color red
+	set_color brblack
 	echo -n '| '
 	set_color normal
 end

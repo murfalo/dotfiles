@@ -245,11 +245,11 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	-- main color scheme
 	{
-		"wincent/base16-nvim",
+		"shaunsingh/nord.nvim",
 		lazy = false, -- load at start
 		priority = 1000, -- load first
 		config = function()
-			vim.cmd([[colorscheme base16-gruvbox-dark-hard]])
+			vim.cmd([[colorscheme nord]])
 			vim.o.background = 'dark'
 			-- XXX: hi Normal ctermbg=NONE
 			-- Make comments more prominent -- they are important.
