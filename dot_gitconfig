@@ -21,7 +21,14 @@
 [github]
 	user = murfalo
 [diff]
+	tool = difftastic
 	algorithm = patience
-	compactionHeuristic = true
+	compactionHeuristic = True
+[difftool]
+	prompt = false
+[difftool "difftastic"]
+	cmd = difft "$LOCAL" "$REMOTE"
+[pager]
+	difftool = true
 [protocol]
 	version = 2
