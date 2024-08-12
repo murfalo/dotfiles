@@ -1,5 +1,5 @@
-[submodule "dot_config/nvim/dot_config/alacritty/themes"]
-	path = dot_config/nvim/dot_config/alacritty/themes
+[submodule "dot_config/alacritty/themes"]
+	path = dot_config/alacritty/themes
 	url = https://github.com/alacritty/alacritty-theme.git
 [submodule "dot_tmux/plugins/tmp"]
 	path = dot_tmux/plugins/tpm
