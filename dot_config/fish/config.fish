@@ -94,7 +94,7 @@ function fish_prompt
 	echo -n "["(date "+%H:%M")"] "
 	set_color brwhite
     if command -q hostnamectl
-	    echo -n (hostnamectl hostname)
+	    echo -n (hostnamectl --static)
     else if command -q hostname
         echo -n (hostname)
     end

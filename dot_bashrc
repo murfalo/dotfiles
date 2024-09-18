@@ -2,9 +2,9 @@
 [[ $- != *i* ]] && return
 
 # Be nice to sysadmins
-if [ -f /etc/bashrc ]; then
+if [[ -f /etc/bashrc ]]; then
   source /etc/bashrc
-elif [ -f /etc/bash.bashrc ]; then
+elif [[ -f /etc/bash.bashrc ]]; then
   source /etc/bash.bashrc
 fi
 
@@ -14,3 +14,24 @@ export HISTSIZE=5000
 export HISTIGNORE="clear:bg:fg:cd:cd -:cd ..:exit:date:w:* --help:ls:l:ll:lll"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# Add common binaries to path
+export PATH="$HOME/.cargo/bin:$HOME/bin:$PATH"
+
+# Activate `nix-user-chroot` to enable fine-grained control of packages on
+# remote hosts
+if [[ -n "$(command -v nix-user-chroot)" ]]; then
+	if [[ -z "$NIX_USER_CHROOTED" ]]; then
+		# Activate the `nix-user-chroot`
+		export NIX_USER_CHROOTED="True"
+		nix-user-chroot ~/.nix bash --login
+	else
+		# Source the profile and launch `fish` (available only within
+		# the profile)
+		if [[ -f ~/.nix-profile/etc/profile.d/nix.sh ]]; then
+			source ~/.nix-profile/etc/profile.d/nix.sh
+		fi
+
+		exec fish --login
+	fi
+fi
